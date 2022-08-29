@@ -10,14 +10,16 @@ import Apartment from './apartments/apartment.entity';
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        host: configService.get('POSTGRES_HOST'),
-        port: configService.get('POSTGRES_PORT'),
-        username: configService.get('POSTGRES_USER'),
-        password: configService.get('POSTGRES_PASSWORD'),
-        database: configService.get('POSTGRES_DB'),
+        host: configService.get('POSTGRES_HOST') || process.env.POSTGRES_HOST,
+        port: configService.get('POSTGRES_PORT') || process.env.POSTGRES_PORT,
+        username:
+          configService.get('POSTGRES_USER') || process.env.POSTGRES_USER,
+        password:
+          configService.get('POSTGRES_PASSWORD') ||
+          process.env.POSTGRES_PASSWORD,
+        database: configService.get('POSTGRES_DB') || process.env.POSTGRES_DB,
         entities: [Apartment],
         synchronize: true,
-        logging: true,
       }),
     }),
   ],

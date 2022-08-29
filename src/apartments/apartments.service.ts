@@ -21,12 +21,10 @@ export default class ApartmentsService {
   }
 
   async getApartmentById(id: number): Promise<Apartment | null> {
-    console.log('apartment id: ', id);
     const apartment = await this.apartmentsRepository.findOne({
       where: { id },
     });
     if (apartment) {
-      console.log('apartment', apartment);
       return apartment;
     }
     throw new HttpException('Apartment not found', HttpStatus.NOT_FOUND);
@@ -46,7 +44,6 @@ export default class ApartmentsService {
   }
 
   async createApartment(apartment: CreateApartmentDto) {
-    console.log('apartment', apartment);
     const newApartment = this.apartmentsRepository.create(apartment);
     await this.apartmentsRepository.save(newApartment);
     return newApartment;
