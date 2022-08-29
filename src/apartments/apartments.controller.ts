@@ -23,19 +23,16 @@ export default class ApartmentsController {
 
   @Get()
   async getAllApartments(@Query() { price, rooms }: GetApartmentsDto) {
-    console.log(`price: ${price}, rooms: ${rooms}`);
     return this.apartmentsService.getAllApartments({ price, rooms });
   }
 
   @Get(':id')
   async getApartmentById(@Param('id', ParseIntPipe) id: number) {
-    console.log('id in controller', id);
     return this.apartmentsService.getApartmentById(id);
   }
 
   @Post()
   async createApartments(@Body() apartments: CreateApartmentDto) {
-    console.log('apartments dto in controller', apartments);
     return this.apartmentsService.createApartment(apartments);
   }
 
